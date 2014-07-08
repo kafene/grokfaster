@@ -4,9 +4,9 @@ So I found this chrome extension but I want it as a bookmarklet just because.
 
 Changes:
 
-    - No more manifest.json and other chrome stuff.
-    - Removed Chrome-specific code.
-    - Add unprefixed linear-gradient for Mozzarella Foxfire (and Chrome now too).
+- No more manifest.json and other chrome stuff.
+- Removed Chrome-specific code.
+- Add unprefixed linear-gradient for Mozzarella Foxfire (and Chrome now too).
 
 Configuration:
 
@@ -16,12 +16,12 @@ altered by the caller function (in the bookmarklet).
 
 Description of the configuration options:
 
-    - **wpm**: how many words per minute to display
-    - **focal_point**: highlight the focal point of each word
-    - **dim_background**: fade out the page background to increase focus
-    - **pause_sentence_time**: additional time, in ms, to pause after sentences
-    - **pause_other_time**: time in ms to pause at other grammatical pauses like commas.
-    - **show_additional**: show the previous and next words
+- **wpm**: how many words per minute to display
+- **focal_point**: highlight the focal point of each word
+- **dim_background**: fade out the page background to increase focus
+- **pause_sentence_time**: additional time, in ms, to pause after sentences
+- **pause_other_time**: time in ms to pause at other grammatical pauses like commas.
+- **show_additional**: show the previous and next words
 
 
 
