@@ -96,7 +96,7 @@ grokfaster.shutting_down = false;
 grokfaster.paused = false;
 grokfaster.delay = 60/300*1000;
 
-grokfaster.calculate_additional_delay: function(word){
+grokfaster.calculate_additional_delay = function(word){
     if(grokfaster.options.pause_sentence_time > 0 && word.match(/\."?'?(\s+|)?$/) !== null){
         return grokfaster.options.pause_sentence_time;
     }else if(grokfaster.options.pause_other_time && word.match(/(;|,|:)$/) !== null){
@@ -105,7 +105,7 @@ grokfaster.calculate_additional_delay: function(word){
     return 0;
 };
 
-grokfaster.format_word: function(word){
+grokfaster.format_word = function(word){
     if(!grokfaster.options.focal_point){
         return word;
     }
@@ -120,7 +120,7 @@ grokfaster.format_word: function(word){
     }
 };
 
-grokfaster.prepare_next_word: function(words){
+grokfaster.prepare_next_word = function(words){
     var word = '';
     while(word === ''){
         word = words.shift();
@@ -130,7 +130,7 @@ grokfaster.prepare_next_word: function(words){
     return grokfaster.format_word(word);
 };
 
-grokfaster.grok: function(text){
+grokfaster.grok = function(text){
     if(grokfaster.running){return;}
 
     var container_el = document.createElement('div');
@@ -197,7 +197,7 @@ grokfaster.grok: function(text){
         grokfaster.running = false;
         grokfaster.paused = false;
         grokfaster.shutting_down = false;
-    }
+    };
 
     var grokfaster_pause = function(){
         if(!grokfaster.running){return;}
@@ -207,7 +207,7 @@ grokfaster.grok: function(text){
             grokfaster.paused = false;
             grokfaster_run();
         }
-    }
+    };
 
     var handle_key_events = function(e){
         if(!grokfaster.running){return;}
@@ -219,7 +219,7 @@ grokfaster.grok: function(text){
             e.preventDefault();
             grokfaster_pause();
         }
-    }
+    };
 
     bg_el.addEventListener('click', grokfaster_kill);
 
@@ -271,10 +271,10 @@ grokfaster.grok: function(text){
         additional_delay = grokfaster.calculate_additional_delay(word_el.textContent || word_el.innerText);
         curWord=nextWord;
         setTimeout(grokfaster_run, grokfaster.delay+additional_delay);
-    }
+    };
 
     grokfaster_run();
-}
+};
 
 if (!document.getElementById('grokfaster_css')) {
     var style = document.createElement('style');
@@ -286,17 +286,3 @@ if (!document.getElementById('grokfaster_css')) {
 } else {
     document.getElementById('grokfaster_css').textContent = grokfaster.css;
 }
-
-var selectedText = String((function () {
-    if (window.getSelection) {
-        return window.getSelection();
-    } else if (document.getSelection) {
-        return document.getSelection();
-    } else if (document.selection) {
-        return document.selection.createRange().text;
-    } else {
-        return '';
-    }
-})());
-
-grokfaster.grok(selectedText);
