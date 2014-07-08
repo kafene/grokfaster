@@ -10,10 +10,9 @@ Changes:
 
 Configuration:
 
-There are some options passed in as an argument to the wrapper function, at the very bottom of the script.
-Until I think of a solution (maybe using the URL fragment to pass in key-value args?), you will have to either
-accept my defaults or clone this and edit files accordingly. The defaults I left in there are the same as
-the original except I bumped the WPM up to 400.
+The options have moved to the bookmarklet. I namespaced the code under
+`window._grokfaster` and exposed it so it can be loaded remotely and
+altered by the caller function (in the bookmarklet).
 
 Description of the configuration options:
 
