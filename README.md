@@ -4,9 +4,9 @@ So I found this chrome extension but I want it as a bookmarklet just because.
 
 Changes:
 
-    - No more manifest.json and other chrome stuff
-    - Removed Chrome-specific code
-    - Add CSS to support other browsers (`-webkit` prefixes). Big thanks to [Colorzilla](http://www.colorzilla.com/gradient-editor/)!
+    - No more manifest.json and other chrome stuff.
+    - Removed Chrome-specific code.
+    - Add unprefixed linear-gradient for Mozzarella Foxfire (and Chrome now too).
 
 Configuration:
 
