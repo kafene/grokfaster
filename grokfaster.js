@@ -130,6 +130,28 @@ grokfaster.prepare_next_word = function(words){
     return grokfaster.format_word(word);
 };
 
+grokfaster.pause = function(){
+    if(!grokfaster.running){return;}
+    if(!grokfaster.paused){
+        grokfaster.paused = true;
+    }else{
+        grokfaster.paused = false;
+        grokfaster_run();
+    }
+};
+
+grokfaster.handle_key_events = function(e){
+    if(!grokfaster.running){return;}
+    e = e || window.event;
+    if (e.keyCode === 27) {
+        grokfaster.shutting_down = true;
+        grokfaster_kill();
+    }else if(e.keyCode == 32){
+        e.preventDefault();
+        grokfaster.pause();
+    }
+};
+
 grokfaster.grok = function(text){
     if(grokfaster.running){return;}
 
@@ -167,12 +189,12 @@ grokfaster.grok = function(text){
     next_word_el.setAttribute('id', 'grokNextWord');
     word_el.setAttribute('id', 'grokCurrentWord');
 
-
-
     if(grokfaster.options.show_additional){
         container_el.appendChild(prev_word_el);
     }
+
     container_el.appendChild(word_el);
+
     if(grokfaster.options.show_additional){
         container_el.appendChild(next_word_el);
     }
@@ -193,37 +215,15 @@ grokfaster.grok = function(text){
             document.body.removeChild(bg_el);
         }
         document.body.removeChild(container_el);
-        document.removeEventListener('keydown', handle_key_events);
+        document.removeEventListener('keydown', function () { grokfaster.handle_key_events(); });
         grokfaster.running = false;
         grokfaster.paused = false;
         grokfaster.shutting_down = false;
     };
 
-    var grokfaster_pause = function(){
-        if(!grokfaster.running){return;}
-        if(!grokfaster.paused){
-            grokfaster.paused = true;
-        }else{
-            grokfaster.paused = false;
-            grokfaster_run();
-        }
-    };
-
-    var handle_key_events = function(e){
-        if(!grokfaster.running){return;}
-        e = e || window.event;
-        if (e.keyCode === 27) {
-            grokfaster.shutting_down = true;
-            grokfaster_kill();
-        }else if(e.keyCode == 32){
-            e.preventDefault();
-            grokfaster_pause();
-        }
-    };
-
     bg_el.addEventListener('click', grokfaster_kill);
 
-    document.addEventListener('keydown', handle_key_events);
+    document.addEventListener('keydown', function () { grokfaster.handle_key_events(); });
 
     var nextWord = '';
     var first = true;
